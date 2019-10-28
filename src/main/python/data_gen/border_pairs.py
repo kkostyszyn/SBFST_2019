@@ -79,10 +79,6 @@ def build (border, lang, n):
         open("adv_data_1k.txt", "w+")]
     
     count = 0
-    if not ps.done():
-        for i in range(3):
-            f[i].write(ps.istring() + "\tTRUE\n")
-            f[i].write(ps.ostring() + "\tFALSE\n")
     
     for i in range(10):
         by_len(border(lang, n*i), f, count)
@@ -91,14 +87,15 @@ def build (border, lang, n):
     
     for i in range(3):
         f[i].close()
-    #return True 
+        
+    return count
     
 def by_len(ex, f, count):
     random_examples=pynini.randgen(ex,10000)
     ps = random_examples.paths(input_token_type="utf8", output_token_type="utf8")
 
     while not ps.done():
-        ps.next()
+
         if ps.istring() and ps.ostring():
             f[0].write(ps.istring() + "\tTRUE\n")
             f[0].write(ps.ostring() + "\tFALSE\n")
@@ -108,6 +105,7 @@ def by_len(ex, f, count):
                 if count %100 ==0:
                     f[2].write(ps.istring() + "\tTRUE\n")
                     f[2].write(ps.ostring() + "\tFALSE\n")
+        ps.next()
         count=count+1      
     
     return True
@@ -172,7 +170,8 @@ for x in lg_classes:
 ### All previous code has been consolidated into this
 ### build() and by_len() functions above. 
 
-build(border, lt[0], 5)
+count = build(border, lt[0], 5)
 
+#right now the only bug i'm seeing is that count isn't returning properly? 
 print("total pairs:"+str(count))
 
