@@ -108,7 +108,7 @@ def by_len(ex, f, count):
         ps.next()
         count=count+1      
     
-    return True
+    #return True
 
 
 ######################

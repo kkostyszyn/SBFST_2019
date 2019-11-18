@@ -1,7 +1,7 @@
 f = open("tags.txt")
 f = f.readlines()
 
-m = open("lib\makefile", "w")
+m = open("lib/makefile", "w")
 
 m.write("fst:\n")
 for x in f:
@@ -9,8 +9,9 @@ for x in f:
     print(y)
     m.write(y)
 
-m.write("\tmv *.fst lib_fst")
+m.write("\tmv *.fst lib_fst\n")
 m.write("clean_att: \n\trm *.att\n")
 m.write("clean_fst: \n\trm *.fst\n")
+m.write("update: \n\tpython3 make.py")
 
 m.close()
